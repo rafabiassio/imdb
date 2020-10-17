@@ -1,10 +1,15 @@
 import React from 'react'
+import { HashRouter } from 'react-router-dom'
+import Routes from './routes'
 import { Grommet } from 'grommet'
 import theme from './theme'
 
 const App = () => {
 	return (
 		<Grommet theme={theme} themeMode="dark">
+			<HashRouter>
+				<Routes />
+			</HashRouter>
 		</Grommet>
 	)
 
