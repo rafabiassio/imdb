@@ -1,8 +1,11 @@
 import React from 'react'
+import { Grommet } from 'grommet'
+import theme from './theme'
 
 const App = () => {
 	return (
-		<div>App</div>
+		<Grommet theme={theme} themeMode="dark">
+		</Grommet>
 	)
 
 }
