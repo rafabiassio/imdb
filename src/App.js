@@ -6,7 +6,7 @@ import theme from './theme'
 
 const App = () => {
 	return (
-		<Grommet theme={theme} themeMode="dark">
+		<Grommet theme={theme}>
 			<HashRouter>
 				<Routes />
 			</HashRouter>

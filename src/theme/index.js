@@ -10,8 +10,13 @@ export const edgeSize = {
 	responsiveBreakpoint: 'small'
 }
 
+export const sizing = {
+	headerHeight: '60px',
+	footerHeight: '45px'
+}
+
 export default {
-	defaultMode: 'light',
+	defaultMode: 'dark',
 	global: {
 		colors: {
 			brand: 'green!',
