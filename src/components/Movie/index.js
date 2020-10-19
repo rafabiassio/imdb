@@ -16,16 +16,15 @@ import {
 
 import { CardTextWrapper, CardContent, TextCard } from './styled'
 
-const Movie = (props) => {
-	const {
-		title,
-		releaseDate,
-		voteAverage,
-		voteCount,
-		imagePath,
-		baseUrl,
-		size
-	} = props
+const Movie = ({
+	title,
+	releaseDate,
+	voteAverage,
+	voteCount,
+	imagePath,
+	baseUrl,
+	size
+}) => {
 
 	const CardDescription = () => {
 		const formatDate = (date) => dateFormat(date, 'dd/mm/yyyy')
@@ -73,15 +72,13 @@ const Movie = (props) => {
 }
 
 Movie.propTypes = {
-	props: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		releaseDate: PropTypes.string.isRequired,
-		voteAverage: PropTypes.string.isRequired,
-		voteCount: PropTypes.string.isRequired,
-		imagePath: PropTypes.string.isRequired,
-		baseUrl: PropTypes.string.isRequired,
-		size: PropTypes.string.isRequired
-	})
+	title: PropTypes.string.isRequired,
+	releaseDate: PropTypes.string.isRequired,
+	voteAverage: PropTypes.number.isRequired,
+	voteCount: PropTypes.number.isRequired,
+	imagePath: PropTypes.string.isRequired,
+	baseUrl: PropTypes.string.isRequired,
+	size: PropTypes.string.isRequired
 }
 
 export default Movie
