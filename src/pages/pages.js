@@ -1,7 +1,5 @@
-import { lazy } from 'react'
-
-const Home = lazy(() => import('./Home'))
-const MovieDetail = lazy(() => import('./MovieDetail'))
+import Home from './Home'
+import MovieDetail from './MovieDetail'
 
 export default {
 	Home,

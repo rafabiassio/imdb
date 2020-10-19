@@ -1,4 +1,5 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 import { api } from '../../../config/axios'
 import * as constants from './constants'
 
@@ -28,6 +29,8 @@ function* getUpcoming({ data }) {
 		const page = +data?.page || 1
 		const imageSizesState = yield select(getImageSizesState)
 
+		yield put(showLoading())
+
 		if (!imageSizesState?.images) {
 			const [movies, imageSizes] = yield all([
 				call(api.get, '/movie/upcoming', {
@@ -52,6 +55,8 @@ function* getUpcoming({ data }) {
 	} catch (error) {
 		console.error(ERROR.LIST)
 		yield put(getUpcomingFailure(error))
+	} finally {
+		yield put(hideLoading())
 	}
 }
 
@@ -62,6 +67,8 @@ function* getById({ data }) {
 			api_key: API_KEY
 		}
 		const imageSizesState = yield select(getImageSizesState)
+
+		yield put(showLoading())
 
 		if (!imageSizesState?.images) {
 			const [movie, imageSizes] = yield all([
@@ -77,6 +84,8 @@ function* getById({ data }) {
 	} catch (error) {
 		console.error(ERROR.GET)
 		yield put(getByIdFailure(error))
+	} finally {
+		yield put(hideLoading())
 	}
 }
 
