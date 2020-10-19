@@ -382,20 +382,11 @@ export default {
 	},
 	card: {
 		container: {
-			background: 'background-front'
-		},
-		body: {
-			pad: 'medium'
+			elevation: 'large',
 		},
 		footer: {
-			pad: {
-				horizontal: 'medium',
-				vertical: 'small'
-			}
+			pad: 'xxsmall',
 		},
-		header: {
-			pad: 'medium'
-		}
 	},
 	checkBox: {
 		hover: {

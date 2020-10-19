@@ -1,7 +1,8 @@
 import pages from '../pages/pages'
+import { HOME } from './paths'
 
 const Home = {
-	path: '/',
+	path: HOME.url,
 	component: pages.Home,
 	exact: true
 }
