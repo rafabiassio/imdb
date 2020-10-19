@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import dateFormat from 'dateformat'
 import {
 	Box,
 	Card,
@@ -14,19 +13,21 @@ import {
 } from 'grommet-icons'
 
 import { CardTextWrapper, CardContent, TextCard } from './styled'
+import formatDate from '../../utils/formatDate'
 
 const Movie = ({
+	movieId,
 	title,
 	releaseDate,
 	voteAverage,
 	voteCount,
 	imagePath,
 	baseUrl,
-	size
+	size,
+	handleClickMovie
 }) => {
 
 	const CardDescription = () => {
-		const formatDate = (date) => dateFormat(date, 'dd/mm/yyyy')
 		const toPercent = (value) => `${value * 10}%`
 
 		const hasVote = Boolean(voteAverage && voteCount)
@@ -60,7 +61,11 @@ const Movie = ({
 	}
 
 	return (
-		<Card width="medium" justify="center">
+		<Card
+			width="medium"
+			justify="center"
+			onClick={() => handleClickMovie({ movieId })}
+		>
 			<CardContent>
 				<CardBody height="medium">
 					<Image
@@ -75,13 +80,15 @@ const Movie = ({
 }
 
 Movie.propTypes = {
+	movieId: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
 	releaseDate: PropTypes.string.isRequired,
 	voteAverage: PropTypes.number.isRequired,
 	voteCount: PropTypes.number.isRequired,
 	imagePath: PropTypes.string.isRequired,
 	baseUrl: PropTypes.string.isRequired,
-	size: PropTypes.string.isRequired
+	size: PropTypes.string.isRequired,
+	handleClickMovie: PropTypes.func.isRequired
 }
 
 export default Movie

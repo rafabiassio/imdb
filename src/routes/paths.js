@@ -3,6 +3,12 @@ export const HOME = {
 	label: 'Home'
 }
 
+export const MOVIE_DETAIL = {
+	url: '/movie/',
+	label: 'Movie Detail'
+}
+
 export default [
-	HOME
+	HOME,
+	MOVIE_DETAIL
 ]

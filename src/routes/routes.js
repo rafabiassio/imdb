@@ -1,9 +1,15 @@
 import pages from '../pages/pages'
-import { HOME } from './paths'
+import { HOME, MOVIE_DETAIL } from './paths'
 
 const Home = {
-	path: `${HOME.url}:page`,
+	path: `${HOME.url}`,
 	component: pages.Home,
+	exact: true
+}
+
+const MovieDetail = {
+	path: `${MOVIE_DETAIL.url}:id`,
+	component: pages.MovieDetail,
 	exact: true
 }
 
@@ -15,5 +21,6 @@ const PageNotFound = {
 
 export default [
 	Home,
+	MovieDetail,
 	PageNotFound
 ]

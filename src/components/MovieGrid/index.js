@@ -8,7 +8,7 @@ import {
 
 import Movie from '../Movie'
 
-const MovieGrid = ({ movies, baseUrl, imageSizes }) => {
+const MovieGrid = ({ movies, baseUrl, imageSizes, handleClickAction }) => {
 	const size = useContext(ResponsiveContext)
 
 	return (
@@ -20,6 +20,7 @@ const MovieGrid = ({ movies, baseUrl, imageSizes }) => {
 				{movies.map((movie, index) => (
 					<Movie
 						key={index}
+						movieId={movie.id}
 						title={movie.title}
 						releaseDate={movie.release_date}
 						voteAverage={movie.vote_average}
@@ -27,6 +28,7 @@ const MovieGrid = ({ movies, baseUrl, imageSizes }) => {
 						imagePath={movie.poster_path}
 						baseUrl={baseUrl}
 						size={imageSizes[3] || imageSizes[0]}
+						handleClickMovie={handleClickAction}
 					/>
 				))}
 			</Grid>
@@ -37,7 +39,8 @@ const MovieGrid = ({ movies, baseUrl, imageSizes }) => {
 MovieGrid.propTypes = {
 	movies: PropTypes.array.isRequired,
 	baseUrl: PropTypes.string.isRequired,
-	imageSizes: PropTypes.array.isRequired
+	imageSizes: PropTypes.array.isRequired,
+	handleClickAction: PropTypes.func.isRequired
 }
 
 export default MovieGrid

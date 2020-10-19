@@ -7,7 +7,7 @@ import { Wrapper, Title } from './styled'
 import MovieGrid from '../../components/MovieGrid'
 import Pagination from '../../components/Pagination'
 import { getUpcomingRequest } from '../../store/modules/movie/actions'
-import { HOME } from '../../routes/paths'
+import { HOME, MOVIE_DETAIL } from '../../routes/paths'
 
 const Home = () => {
 	const dispatch = useDispatch()
@@ -60,6 +60,13 @@ const Home = () => {
 		})
 	}
 
+	const handleMovieDetail = ({ movieId }) => {
+		history.push({
+			pathname: `${MOVIE_DETAIL.url}${movieId}`,
+			state: { id: movieId }
+		})
+	}
+
 	return (
 		<Wrapper>
 			<Title>
@@ -70,6 +77,7 @@ const Home = () => {
 					movies={movies}
 					baseUrl={imageSizes?.base_url}
 					imageSizes={imageSizes?.poster_sizes}
+					handleClickAction={handleMovieDetail}
 				/>
 			}
 			{allowPagination &&
