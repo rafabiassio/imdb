@@ -1,25 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box } from 'grommet'
+import { useHistory, useLocation } from 'react-router-dom'
 
-import { Title } from './styled'
+import { Wrapper, Title } from './styled'
 import MovieGrid from '../../components/MovieGrid'
+import Pagination from '../../components/Pagination'
 import { getUpcomingRequest } from '../../store/modules/movie/actions'
+import { HOME } from '../../routes/paths'
 
 const Home = () => {
 	const dispatch = useDispatch()
+	const history = useHistory()
+	const location = useLocation()
 	const [allowList, setAllowList] = useState(false)
+	const [allowPagination, setAllowPagination] = useState(false)
 	const {
 		movies = [],
-		imageSizes = {}
+		imageSizes = {},
+		page,
+		totalResults,
+		totalPages
 	} = useSelector((state) => ({
 		movies: state.movie.movies,
-		imageSizes: state.movie.imageSizes
+		imageSizes: state.movie.imageSizes,
+		page: state.movie.page,
+		totalResults: state.movie.totalResults,
+		totalPages: state.movie.totalPages
 	}))
 
 	useEffect(() => {
-		dispatch(getUpcomingRequest())
+		const { state, pathname } = location
+		const pageValue = state?.page || pathname.split('/').reverse()[0]
+		let requestProps = {}
+
+		if (pageValue) {
+			requestProps = { page: pageValue }
+		}
+		dispatch(getUpcomingRequest(requestProps))
 	}, [])
 
 	useEffect(() => {
@@ -28,8 +46,22 @@ const Home = () => {
 		}
 	}, [imageSizes])
 
+	useEffect(() => {
+		if (totalResults > 0) {
+			setAllowPagination(true)
+		}
+	}, [totalResults])
+
+	const handlePageAction = ({ pageValue }) => {
+		dispatch(getUpcomingRequest({ page: pageValue }))
+		history.push({
+			pathname: `${HOME.url}${pageValue}`,
+			state: { page: pageValue }
+		})
+	}
+
 	return (
-		<Box>
+		<Wrapper>
 			<Title>
 				Upcoming Movies
 			</Title>
@@ -40,7 +72,15 @@ const Home = () => {
 					imageSizes={imageSizes?.poster_sizes}
 				/>
 			}
-		</Box>
+			{allowPagination &&
+				<Pagination
+					page={page}
+					totalPages={totalPages}
+					totalResults={totalResults}
+					handlePageAction={handlePageAction}
+				/>
+			}
+		</Wrapper>
 	)
 }
 

@@ -5,7 +5,7 @@ const initialState = {
 	content: null,
 	movies: [],
 	page: 1,
-	totalResuls: 0,
+	totalResults: 0,
 	totalPages: 0,
 	imageSizes: {},
 	error: {},
@@ -21,8 +21,9 @@ export default (state = initialState, action) => {
 				loading: false,
 				content: null,
 				movies: action.data?.results || [],
-				totalResuls: action.data?.total_results || 0,
+				totalResults: action.data?.total_results || 0,
 				totalPages: action.data?.total_pages || 0,
+				page: action.data?.page || 1,
 			}
 		case actions.GET_UPCOMING.FAILURE:
 			return {

@@ -1,5 +1,9 @@
 import styled from 'styled-components'
-import { Heading } from 'grommet'
+import { Box, Heading } from 'grommet'
+
+export const Wrapper = styled(Box)`
+	overflow: overlay;
+`
 
 export const Title = styled(Heading)`
   min-width: 100%;
