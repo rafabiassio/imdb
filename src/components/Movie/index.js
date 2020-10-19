@@ -6,7 +6,6 @@ import {
 	Card,
 	Heading,
 	CardBody,
-	Text,
 	Image,
 } from 'grommet'
 import {
@@ -30,6 +29,8 @@ const Movie = ({
 		const formatDate = (date) => dateFormat(date, 'dd/mm/yyyy')
 		const toPercent = (value) => `${value * 10}%`
 
+		const hasVote = Boolean(voteAverage && voteCount)
+
 		return (
 			<CardTextWrapper>
 				<Box width="100%">
@@ -40,16 +41,18 @@ const Movie = ({
 						<TextCard>
 							{formatDate(releaseDate)}
 						</TextCard>
-						<Box direction="row" gap="xsmall" align="center">
-							<FavoriteIcon size="small" />
-							<TextCard>
-								{toPercent(voteAverage)}
-							</TextCard>
-							<GroupIcon size="small" />
-							<TextCard>
-								{voteCount}
-							</TextCard>
-						</Box>
+						{hasVote &&
+							<Box direction="row" gap="xsmall" align="center">
+								<FavoriteIcon size="small" />
+								<TextCard>
+									{toPercent(voteAverage)}
+								</TextCard>
+								<GroupIcon size="small" />
+								<TextCard>
+									{voteCount}
+								</TextCard>
+							</Box>
+						}
 					</Box>
 				</Box>
 			</CardTextWrapper>
